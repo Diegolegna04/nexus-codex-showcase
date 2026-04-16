@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { NerdModeProvider } from "@/components/NerdModeContext";
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import FeaturedProject from "@/components/FeaturedProject";
@@ -22,16 +21,14 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <NerdModeProvider>
-      <div className="min-h-screen bg-background text-foreground">
-        <Navigation />
-        <Hero />
-        <FeaturedProject />
-        <Projects />
-        <About />
-        <Skills />
-        <Contact />
-      </div>
-    </NerdModeProvider>
+    <div className="min-h-screen bg-background text-foreground">
+      <Navigation />
+      <Hero />
+      <FeaturedProject />
+      <Projects limit={3} showViewAll />
+      <About />
+      <Skills />
+      <Contact />
+    </div>
   );
 }

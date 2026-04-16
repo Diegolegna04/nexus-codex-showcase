@@ -1,36 +1,14 @@
+import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { useNerdMode } from "./NerdModeContext";
+import { projects } from "@/lib/projects";
 
-interface Project {
-  title: string;
-  nerdTitle?: string;
-  description: string;
-  tech: string[];
+interface Props {
+  limit?: number;
+  showViewAll?: boolean;
 }
 
-const projects: Project[] = [
-  {
-    title: "Task Manager",
-    nerdTitle: "Quest Log",
-    description: "A real-time task management app with drag-and-drop, filters, and team collaboration features.",
-    tech: ["Angular", "Firebase", "TypeScript"],
-  },
-  {
-    title: "Weather Dashboard",
-    nerdTitle: "Realm Scanner",
-    description: "A clean weather dashboard fetching live data with animated charts and location search.",
-    tech: ["Angular", "Chart.js", "OpenWeather API"],
-  },
-  {
-    title: "Dev Blog",
-    nerdTitle: "Codex Entries",
-    description: "A minimal blog platform with markdown rendering, syntax highlighting, and dark mode.",
-    tech: ["Angular", "Node.js", "MongoDB"],
-  },
-];
-
-export default function Projects() {
-  const { nerdMode } = useNerdMode();
+export default function Projects({ limit, showViewAll = false }: Props) {
+  const items = limit ? projects.filter((p) => !p.featured).slice(0, limit) : projects.filter((p) => !p.featured);
 
   return (
     <section className="px-6 py-24">
@@ -40,54 +18,82 @@ export default function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.5 }}
+          className="flex items-end justify-between"
         >
-          <p className="font-mono text-[11px] tracking-[0.3em] text-primary uppercase mb-2">
-            {nerdMode ? "// side_quests" : "// more projects"}
-          </p>
-          <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl">
-            {nerdMode ? "Side Quests" : "Other Projects"}
-          </h2>
+          <div>
+            <p className="font-mono text-[11px] tracking-[0.3em] text-primary uppercase mb-2">
+              // projects
+            </p>
+            <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl">
+              Other Projects
+            </h2>
+          </div>
+          {showViewAll && (
+            <Link
+              to="/projects"
+              className="hidden sm:inline-flex items-center gap-1.5 font-mono text-xs tracking-wider text-muted-foreground uppercase transition-colors hover:text-primary"
+            >
+              View all
+              <span>→</span>
+            </Link>
+          )}
         </motion.div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project, i) => (
+          {items.map((project, i) => (
             <motion.div
-              key={project.title}
+              key={project.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="group relative overflow-hidden rounded-lg border border-border bg-surface p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-[0_0_30px_-10px_var(--glow-muted)]"
             >
-              <div className="mb-4 flex items-center justify-between">
-                <span className="font-mono text-[10px] tracking-widest text-muted-foreground/50 uppercase">
-                  {nerdMode ? `mission_0${i + 2}` : `project_0${i + 2}`}
-                </span>
-                <svg className="h-4 w-4 text-muted-foreground/30 transition-colors group-hover:text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                </svg>
-              </div>
-
-              <h3 className="font-display text-lg font-semibold text-foreground">
-                {nerdMode ? (project.nerdTitle || project.title) : project.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {project.description}
-              </p>
-
-              <div className="mt-5 flex flex-wrap gap-1.5">
-                {project.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded border border-border px-2 py-0.5 font-mono text-[9px] tracking-wider text-muted-foreground/70 uppercase"
-                  >
-                    {t}
+              <Link
+                to="/projects/$projectId"
+                params={{ projectId: project.id }}
+                className="group relative block overflow-hidden rounded-xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-[0_8px_30px_-12px_var(--glow-muted)] hover:-translate-y-0.5"
+              >
+                <div className="mb-4 flex items-center justify-between">
+                  <span className="font-mono text-[10px] tracking-widest text-muted-foreground/50 uppercase">
+                    {project.year}
                   </span>
-                ))}
-              </div>
+                  <svg className="h-4 w-4 text-muted-foreground/30 transition-all group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                  </svg>
+                </div>
+
+                <h3 className="font-display text-lg font-semibold text-foreground">
+                  {project.title}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-2">
+                  {project.description}
+                </p>
+
+                <div className="mt-5 flex flex-wrap gap-1.5">
+                  {project.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-md border border-border px-2 py-0.5 font-mono text-[9px] tracking-wider text-muted-foreground/70 uppercase"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </Link>
             </motion.div>
           ))}
         </div>
+
+        {showViewAll && (
+          <div className="mt-8 text-center sm:hidden">
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-1.5 font-mono text-xs tracking-wider text-muted-foreground uppercase transition-colors hover:text-primary"
+            >
+              View all projects →
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

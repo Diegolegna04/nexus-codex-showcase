@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useNerdMode } from "./NerdModeContext";
 
 const links = [
   {
@@ -31,9 +30,11 @@ const links = [
   },
 ];
 
-export default function Contact() {
-  const { nerdMode } = useNerdMode();
+interface Props {
+  expanded?: boolean;
+}
 
+export default function Contact({ expanded = false }: Props) {
   return (
     <section id="contact" className="px-6 py-24">
       <div className="mx-auto max-w-2xl text-center">
@@ -44,15 +45,13 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
         >
           <p className="font-mono text-[11px] tracking-[0.3em] text-primary uppercase mb-2">
-            {nerdMode ? "// establish_link" : "// contact"}
+            // contact
           </p>
           <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl">
-            {nerdMode ? "Establish Link" : "Get in Touch"}
+            Get in Touch
           </h2>
           <p className="mt-4 text-sm text-muted-foreground">
-            {nerdMode
-              ? "Ready to synchronize. Send a signal through any of these channels."
-              : "Interested in working together? Let's connect."}
+            Interested in working together? Let's connect.
           </p>
         </motion.div>
 
@@ -72,21 +71,33 @@ export default function Contact() {
               className="group flex flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
               aria-label={link.label}
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-lg border border-border bg-surface transition-all group-hover:border-primary/30 group-hover:shadow-[0_0_20px_-6px_var(--glow-muted)]">
+              <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-card shadow-sm transition-all group-hover:border-primary/30 group-hover:shadow-[0_4px_20px_-6px_var(--glow-muted)] group-hover:-translate-y-0.5">
                 {link.icon}
               </span>
               <span className="font-mono text-[10px] tracking-wider uppercase">{link.label}</span>
             </a>
           ))}
         </motion.div>
+
+        {expanded && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="mt-12 text-sm text-muted-foreground"
+          >
+            <p>
+              I'm always open to discussing new projects, creative ideas, or opportunities to be part of something great.
+              Feel free to reach out through any of the channels above.
+            </p>
+          </motion.div>
+        )}
       </div>
 
-      {/* Footer */}
       <div className="mx-auto mt-24 max-w-6xl border-t border-border pt-8 text-center">
         <p className="font-mono text-[10px] tracking-widest text-muted-foreground/40 uppercase">
-          {nerdMode
-            ? "// session_terminated — nothing_is_true, everything_is_permitted"
-            : `© ${new Date().getFullYear()} — Built with Angular & passion`}
+          © {new Date().getFullYear()} — Built with Angular & passion
         </p>
       </div>
     </section>
