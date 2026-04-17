@@ -5,10 +5,10 @@ import Contact from "@/components/Contact";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Your Name" },
-      { name: "description", content: "Get in touch for collaboration, projects, or just to say hello." },
-      { property: "og:title", content: "Contact — Your Name" },
-      { property: "og:description", content: "Get in touch for collaboration or projects." },
+      { title: "Contact — Diego Legnaro" },
+      { name: "description", content: "Get in touch with Diego Legnaro for full stack roles, internships or Angular collaboration." },
+      { property: "og:title", content: "Contact — Diego Legnaro" },
+      { property: "og:description", content: "Open to junior full stack roles, internships and Angular collaborations." },
     ],
   }),
   component: ContactPage,

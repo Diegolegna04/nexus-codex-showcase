@@ -8,10 +8,10 @@ import { projects } from "@/lib/projects";
 export const Route = createFileRoute("/projects/")({
   head: () => ({
     meta: [
-      { title: "Projects — Your Name" },
-      { name: "description", content: "Explore my portfolio of web development projects built with Angular, TypeScript, and modern technologies." },
-      { property: "og:title", content: "Projects — Your Name" },
-      { property: "og:description", content: "Web development projects built with Angular and modern technologies." },
+      { title: "Projects — Diego Legnaro" },
+      { name: "description", content: "Selected projects by Diego Legnaro: Angular full-stack apps, internship work and personal builds." },
+      { property: "og:title", content: "Projects — Diego Legnaro" },
+      { property: "og:description", content: "Angular full-stack apps, internship work and personal builds." },
     ],
   }),
   component: ProjectsPage,
@@ -36,7 +36,8 @@ function ProjectsPage() {
                 Projects
               </h1>
               <p className="mt-4 max-w-lg text-sm text-muted-foreground">
-                A selection of projects I've built, from full-stack applications to frontend experiments.
+                A focused selection — full-stack work, internship deliveries and
+                personal builds where I owned the stack end to end.
               </p>
             </motion.div>
 

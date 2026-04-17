@@ -9,9 +9,9 @@ export const Route = createFileRoute("/projects/$projectId")({
     return {
       meta: project
         ? [
-            { title: `${project.title} — Your Name` },
+            { title: `${project.title} — Diego Legnaro` },
             { name: "description", content: project.description },
-            { property: "og:title", content: `${project.title} — Your Name` },
+            { property: "og:title", content: `${project.title} — Diego Legnaro` },
             { property: "og:description", content: project.description },
           ]
         : [{ title: "Project Not Found" }],

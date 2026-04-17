@@ -10,10 +10,10 @@ import Contact from "@/components/Contact";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your Name — Full Stack Developer" },
-      { name: "description", content: "Full Stack Developer specializing in Angular. Portfolio showcasing projects, skills, and passion for modern web development." },
-      { property: "og:title", content: "Your Name — Full Stack Developer" },
-      { property: "og:description", content: "Full Stack Developer specializing in Angular." },
+      { title: "Diego Legnaro — Full Stack Developer" },
+      { name: "description", content: "Junior full stack developer focused on Angular, TypeScript and Java/Quarkus. Portfolio, projects and skills." },
+      { property: "og:title", content: "Diego Legnaro — Full Stack Developer" },
+      { property: "og:description", content: "Junior full stack developer focused on Angular and TypeScript." },
     ],
   }),
   component: Index,
