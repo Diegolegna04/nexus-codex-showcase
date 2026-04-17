@@ -21,7 +21,7 @@ const links = [
   },
   {
     label: "Email",
-    href: "mailto:hello@example.com",
+    href: "mailto:diego.legnaro2004@gmail.com",
     icon: (
       <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
@@ -48,10 +48,12 @@ export default function Contact({ expanded = false }: Props) {
             // contact
           </p>
           <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl">
-            Get in Touch
+            Let's build something
           </h2>
           <p className="mt-4 text-sm text-muted-foreground">
-            Interested in working together? Let's connect.
+            Open to junior full stack roles, internships and collaboration on
+            interesting Angular or full-stack projects. The fastest way to reach
+            me is by email.
           </p>
         </motion.div>
 
@@ -66,7 +68,7 @@ export default function Contact({ expanded = false }: Props) {
             <a
               key={link.label}
               href={link.href}
-              target="_blank"
+              target={link.href.startsWith("mailto:") ? undefined : "_blank"}
               rel="noopener noreferrer"
               className="group flex flex-col items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
               aria-label={link.label}
@@ -85,11 +87,15 @@ export default function Contact({ expanded = false }: Props) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.3 }}
-            className="mt-12 text-sm text-muted-foreground"
+            className="mt-12 space-y-4 text-sm text-muted-foreground"
           >
             <p>
-              I'm always open to discussing new projects, creative ideas, or opportunities to be part of something great.
-              Feel free to reach out through any of the channels above.
+              I read everything that lands in my inbox. Whether it's a role, a
+              project idea or a question about something I built — feel free to
+              get in touch.
+            </p>
+            <p className="font-mono text-xs text-foreground">
+              diego.legnaro2004@gmail.com
             </p>
           </motion.div>
         )}
@@ -97,7 +103,7 @@ export default function Contact({ expanded = false }: Props) {
 
       <div className="mx-auto mt-24 max-w-6xl border-t border-border pt-8 text-center">
         <p className="font-mono text-[10px] tracking-widest text-muted-foreground/40 uppercase">
-          © {new Date().getFullYear()} — Built with Angular & passion
+          © {new Date().getFullYear()} Diego Legnaro — Built with Angular in mind
         </p>
       </div>
     </section>

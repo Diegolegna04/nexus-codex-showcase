@@ -12,55 +12,38 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: "anime-tracker",
-    title: "Anime Tracker",
-    description: "A full-featured anime tracking application inspired by MyAnimeList. Browse, search, and track your anime library with a sleek, responsive interface.",
-    longDescription: "Built from the ground up with Angular, this application lets users browse an extensive anime database, manage their watch lists, rate shows, and discover recommendations. Features include real-time search, responsive grid layouts, detailed anime pages with episode tracking, and a personalized dashboard. The app consumes multiple REST APIs and handles complex state management with RxJS.",
-    tech: ["Angular", "TypeScript", "REST API", "SCSS", "RxJS"],
+    id: "myanimelist-clone",
+    title: "MyAnimeList Clone",
+    description: "Full-stack anime catalog with user accounts, custom profiles and personal watchlists. Built end-to-end as a personal project.",
+    longDescription:
+      "A complete reimagining of MyAnimeList, built from scratch to explore full-stack architecture. The Angular frontend handles browsing, search, ratings and personalized profile pages, while a Java backend powered by Quarkus exposes a REST API backed by MongoDB. The project covers authentication, user management, complex data modeling and a responsive, content-heavy UI — a deliberate exercise in owning the entire stack.",
+    tech: ["Angular", "TypeScript", "Java", "Quarkus", "MongoDB", "REST API"],
     featured: true,
     year: "2024",
     role: "Full Stack Developer",
     links: [
-      { label: "Live Demo", href: "#" },
       { label: "Source Code", href: "#" },
     ],
   },
   {
-    id: "task-manager",
-    title: "Task Manager",
-    description: "A real-time task management app with drag-and-drop, filters, and team collaboration features.",
-    longDescription: "A comprehensive project management tool featuring real-time updates via Firebase, drag-and-drop task boards (Kanban-style), advanced filtering, team workspaces, and notification systems. Built with a focus on performance and intuitive UX.",
-    tech: ["Angular", "Firebase", "TypeScript"],
+    id: "course-deadline-manager",
+    title: "Course Deadline Manager",
+    description: "Internal web app to track training course deadlines and renewals, built during my internship at Graffi Design.",
+    longDescription:
+      "Designed and developed during my internship at Graffi Design Pubblicità, this PHP-based web application manages a registry of training courses, expiration dates and renewal alerts. The tool replaced a manual spreadsheet workflow and gave the team a single source of truth for compliance tracking, with a focus on clarity, speed and ease of data entry.",
+    tech: ["PHP", "MySQL", "HTML", "CSS"],
+    year: "2025",
+    role: "Web Developer Intern",
+  },
+  {
+    id: "shopify-storefront",
+    title: "Shopify Storefront",
+    description: "Content and product management on a live e-commerce storefront during my first internship at Global Brand Communication.",
+    longDescription:
+      "Hands-on work on a production Shopify store: maintaining product catalogs, updating page content, configuring collections and ensuring a consistent customer experience. The role was my first exposure to a real-world client environment and to the operational side of running an online store.",
+    tech: ["Shopify", "Liquid", "HTML", "CSS"],
     year: "2024",
-    role: "Frontend Developer",
-    links: [
-      { label: "Source Code", href: "#" },
-    ],
-  },
-  {
-    id: "weather-dashboard",
-    title: "Weather Dashboard",
-    description: "A clean weather dashboard fetching live data with animated charts and location search.",
-    longDescription: "A weather application that provides detailed forecasts with beautiful data visualizations. Features include geo-location detection, city search with autocomplete, 7-day forecasts, hourly breakdowns, and interactive charts showing temperature trends, precipitation, and wind patterns.",
-    tech: ["Angular", "Chart.js", "OpenWeather API"],
-    year: "2023",
-    role: "Frontend Developer",
-    links: [
-      { label: "Live Demo", href: "#" },
-    ],
-  },
-  {
-    id: "dev-blog",
-    title: "Dev Blog",
-    description: "A minimal blog platform with markdown rendering, syntax highlighting, and dark mode.",
-    longDescription: "A developer-focused blogging platform with server-side rendering, markdown support with syntax highlighting, tag-based categorization, full-text search, and a clean reading experience. The CMS supports draft/publish workflows and image optimization.",
-    tech: ["Angular", "Node.js", "MongoDB"],
-    year: "2023",
-    role: "Full Stack Developer",
-    links: [
-      { label: "Live Demo", href: "#" },
-      { label: "Source Code", href: "#" },
-    ],
+    role: "Web Developer Intern",
   },
 ];
 
