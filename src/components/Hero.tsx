@@ -2,7 +2,12 @@ import { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
-const roles = ["Full Stack Developer", "Angular Enthusiast", "UI Architect", "Problem Solver"];
+const roles = [
+  "Full Stack Developer",
+  "Angular Specialist",
+  "TypeScript Enthusiast",
+  "Problem Solver",
+];
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -57,7 +62,7 @@ export default function Hero() {
           transition={{ delay: 0.4, duration: 0.6 }}
           className="font-display text-5xl font-bold tracking-tight text-foreground sm:text-7xl"
         >
-          Your Name
+          Diego Legnaro
         </motion.h1>
 
         <motion.div
@@ -78,7 +83,9 @@ export default function Hero() {
           transition={{ delay: 1, duration: 0.6 }}
           className="mx-auto mt-6 max-w-lg text-sm leading-relaxed text-muted-foreground"
         >
-          Building digital experiences with precision and passion. Specializing in Angular and modern web technologies.
+          Junior web developer with a strong focus on Angular and the modern
+          TypeScript stack. I build clean, maintainable interfaces and full-stack
+          features end to end.
         </motion.p>
 
         <motion.div

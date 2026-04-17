@@ -31,10 +31,19 @@ export default function FeaturedProject() {
           className="mt-12 grid gap-8 lg:grid-cols-5"
         >
           <div className="group relative overflow-hidden rounded-xl border border-border bg-card shadow-sm lg:col-span-3">
-            <div className="aspect-video w-full bg-gradient-to-br from-surface-elevated to-surface flex items-center justify-center">
-              <div className="text-center">
-                <div className="font-mono text-6xl font-bold text-primary/20">アニメ</div>
-                <div className="mt-2 font-mono text-xs text-muted-foreground/50">App Preview</div>
+            <div className="aspect-video w-full bg-gradient-to-br from-surface-elevated to-surface flex items-center justify-center relative">
+              <div
+                className="pointer-events-none absolute inset-0 opacity-[0.06]"
+                style={{
+                  backgroundImage: `linear-gradient(var(--primary) 1px, transparent 1px), linear-gradient(90deg, var(--primary) 1px, transparent 1px)`,
+                  backgroundSize: "32px 32px",
+                }}
+              />
+              <div className="relative text-center">
+                <div className="font-mono text-6xl font-bold text-primary/25">アニメ</div>
+                <div className="mt-2 font-mono text-[10px] tracking-widest text-muted-foreground/50 uppercase">
+                  Anime · Catalog · Profiles
+                </div>
               </div>
             </div>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />

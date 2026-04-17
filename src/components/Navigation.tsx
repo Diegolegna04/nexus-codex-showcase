@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
+import ThemeSwitcher from "./ThemeSwitcher";
 import { useTheme } from "./ThemeContext";
 
 const navItems = [
@@ -9,16 +10,8 @@ const navItems = [
   { label: "Contact", href: "/contact" },
 ];
 
-const themeIcons: Record<string, string> = {
-  dark: "◐",
-  light: "○",
-  dim: "◑",
-};
-
-const themeOrder = ["dark", "light", "dim"] as const;
-
 export default function Navigation() {
-  const { theme, setTheme } = useTheme();
+  const { theme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
@@ -28,11 +21,6 @@ export default function Navigation() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const cycleTheme = () => {
-    const idx = themeOrder.indexOf(theme as typeof themeOrder[number]);
-    setTheme(themeOrder[(idx + 1) % themeOrder.length]);
-  };
 
   const isHome = location.pathname === "/";
 
@@ -48,7 +36,7 @@ export default function Navigation() {
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground">
           <span className="text-primary">&lt;</span>
-          dev
+          dl
           <span className="text-primary">/&gt;</span>
         </Link>
 
@@ -72,24 +60,22 @@ export default function Navigation() {
               {item.label}
             </Link>
           ))}
-          <button
-            onClick={cycleTheme}
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted-foreground transition-all hover:border-primary/50 hover:text-primary"
-            title={`Theme: ${theme}`}
-          >
-            <span className="text-sm">{themeIcons[theme]}</span>
-          </button>
+          <ThemeSwitcher />
         </div>
 
         {/* Mobile toggle */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="flex flex-col gap-1.5 md:hidden"
-        >
-          <span className={`block h-0.5 w-6 bg-foreground transition-transform ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`block h-0.5 w-6 bg-foreground transition-opacity ${mobileOpen ? "opacity-0" : ""}`} />
-          <span className={`block h-0.5 w-6 bg-foreground transition-transform ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
-        </button>
+        <div className="flex items-center gap-3 md:hidden">
+          <ThemeSwitcher />
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            className="flex flex-col gap-1.5"
+            aria-label="Toggle menu"
+          >
+            <span className={`block h-0.5 w-6 bg-foreground transition-transform ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`block h-0.5 w-6 bg-foreground transition-opacity ${mobileOpen ? "opacity-0" : ""}`} />
+            <span className={`block h-0.5 w-6 bg-foreground transition-transform ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -112,12 +98,9 @@ export default function Navigation() {
                   {item.label}
                 </Link>
               ))}
-              <button
-                onClick={cycleTheme}
-                className="font-mono text-xs text-muted-foreground hover:text-primary text-left"
-              >
-                Theme: {theme} {themeIcons[theme]}
-              </button>
+              <span className="font-mono text-[10px] text-muted-foreground/60 uppercase tracking-wider">
+                Theme: {theme}
+              </span>
             </div>
           </motion.div>
         )}
