@@ -1,11 +1,13 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { usePhantomMode } from "./PhantomModeContext";
 
 interface Props {
   expanded?: boolean;
 }
 
 export default function About({ expanded = false }: Props) {
+  const { displayName, active } = usePhantomMode();
   return (
     <section id="about" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
@@ -74,6 +76,7 @@ export default function About({ expanded = false }: Props) {
           {/* Bio */}
           <div className="lg:col-span-2 flex flex-col justify-center">
             <p className="text-sm leading-relaxed text-muted-foreground">
+              {active ? `I am ${displayName}. ` : ""}
               I'm a junior web developer recently graduated from{" "}
               <span className="text-foreground font-medium">ITS INCOM</span>, with
               a strong focus on <span className="text-foreground font-medium">Angular</span>{" "}
