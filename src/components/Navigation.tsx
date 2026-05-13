@@ -1,8 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "@tanstack/react-router";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeSwitcher from "./ThemeSwitcher";
 import { useTheme } from "./ThemeContext";
+import { usePhantomMode } from "./PhantomModeContext";
 
 const navItems = [
   { label: "Projects", href: "/projects" },
@@ -12,9 +13,11 @@ const navItems = [
 
 export default function Navigation() {
   const { theme } = useTheme();
+  const { activate, active, short } = usePhantomMode();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const logoClicks = useRef<number[]>([]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -23,6 +26,15 @@ export default function Navigation() {
   }, []);
 
   const isHome = location.pathname === "/";
+
+  const handleLogoSecret = () => {
+    const now = performance.now();
+    logoClicks.current = [...logoClicks.current, now].filter((t) => now - t < 2500);
+    if (logoClicks.current.length >= 5) {
+      logoClicks.current = [];
+      activate("logo");
+    }
+  };
 
   return (
     <motion.nav
@@ -34,9 +46,14 @@ export default function Navigation() {
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link to="/" className="font-display text-lg font-bold tracking-tight text-foreground">
+        <Link
+          to="/"
+          onClick={handleLogoSecret}
+          className="font-display text-lg font-bold tracking-tight text-foreground select-none"
+          title="·"
+        >
           <span className="text-primary">&lt;</span>
-          dl
+          {short.toLowerCase()}
           <span className="text-primary">/&gt;</span>
         </Link>
 
@@ -60,6 +77,15 @@ export default function Navigation() {
               {item.label}
             </Link>
           ))}
+          {active && (
+            <Link
+              to="/secret"
+              className="font-mono text-xs tracking-wider uppercase transition-colors"
+              style={{ color: "var(--primary)" }}
+            >
+              ✦ Off-Record
+            </Link>
+          )}
           <ThemeSwitcher />
         </div>
 
@@ -105,6 +131,14 @@ export default function Navigation() {
           </motion.div>
         )}
       </AnimatePresence>
+      {/* Almost-invisible discoverability hint */}
+      <span
+        aria-hidden
+        className="pointer-events-none absolute right-3 top-1 font-mono text-[8px] tracking-[0.4em] text-muted-foreground/20 select-none"
+        title="something is here"
+      >
+        {active ? "▲▲▼▼◀▶◀▶" : "·"}
+      </span>
     </motion.nav>
   );
 }

@@ -1,6 +1,9 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { ThemeProvider } from "@/components/ThemeContext";
+import { PhantomModeProvider } from "@/components/PhantomModeContext";
 import PhantomEasterEgg from "@/components/PhantomEasterEgg";
+import SlashOverlay from "@/components/SlashOverlay";
+import PhantomCursor from "@/components/PhantomCursor";
 
 import appCss from "../styles.css?url";
 
@@ -63,8 +66,12 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   return (
     <ThemeProvider>
-      <Outlet />
-      <PhantomEasterEgg />
+      <PhantomModeProvider>
+        <Outlet />
+        <PhantomEasterEgg />
+        <SlashOverlay />
+        <PhantomCursor />
+      </PhantomModeProvider>
     </ThemeProvider>
   );
 }

@@ -1,7 +1,9 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import { getProject } from "@/lib/projects";
+import { usePhantomMode } from "@/components/PhantomModeContext";
 
 export const Route = createFileRoute("/projects/$projectId")({
   head: ({ params }) => {
@@ -33,6 +35,12 @@ export const Route = createFileRoute("/projects/$projectId")({
 function ProjectDetail() {
   const { projectId } = Route.useParams();
   const project = getProject(projectId);
+  const { triggerSlash } = usePhantomMode();
+
+  useEffect(() => {
+    triggerSlash(project ? project.title.split(" ")[0].toUpperCase() : "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [projectId]);
 
   if (!project) {
     throw notFound();
