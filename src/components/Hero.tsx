@@ -1,15 +1,24 @@
 import { useState, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { usePhantomMode } from "./PhantomModeContext";
 
-const roles = [
+const baseRoles = [
   "Full Stack Developer",
   "Angular Specialist",
   "TypeScript Enthusiast",
   "Problem Solver",
 ];
+const phantomRoles = [
+  "Code Phantom",
+  "Bug Burglar",
+  "Stack Trickster",
+  "Take Your Bugs",
+];
 
 export default function Hero() {
+  const { active, displayName } = usePhantomMode();
+  const roles = active ? phantomRoles : baseRoles;
   const [roleIndex, setRoleIndex] = useState(0);
   const [displayed, setDisplayed] = useState("");
   const [deleting, setDeleting] = useState(false);
@@ -53,7 +62,7 @@ export default function Hero() {
           transition={{ delay: 0.2, duration: 0.8 }}
           className="mb-6 font-mono text-[11px] tracking-[0.3em] text-muted-foreground uppercase"
         >
-          &gt; session.start()
+          {active ? "> infiltration.start()" : "> session.start()"}
         </motion.p>
 
         <motion.h1
@@ -62,7 +71,7 @@ export default function Hero() {
           transition={{ delay: 0.4, duration: 0.6 }}
           className="font-display text-5xl font-bold tracking-tight text-foreground sm:text-7xl"
         >
-          Diego Legnaro
+          {displayName}
         </motion.h1>
 
         <motion.div
