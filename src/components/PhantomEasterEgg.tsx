@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useTheme } from "./ThemeContext";
+import { usePhantomMode } from "./PhantomModeContext";
 
 const SEQUENCE = [
   "ArrowUp", "ArrowUp",
@@ -11,7 +11,7 @@ const SEQUENCE = [
 ];
 
 export default function PhantomEasterEgg() {
-  const { setTheme } = useTheme();
+  const { activate } = usePhantomMode();
   const [active, setActive] = useState(false);
 
   useEffect(() => {
@@ -28,12 +28,12 @@ export default function PhantomEasterEgg() {
     };
     const trigger = () => {
       setActive(true);
-      window.setTimeout(() => setTheme("phantom"), 650);
-      window.setTimeout(() => setActive(false), 1800);
+      activate("konami");
+      window.setTimeout(() => setActive(false), 2200);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [setTheme]);
+  }, [activate]);
 
   return (
     <AnimatePresence>
