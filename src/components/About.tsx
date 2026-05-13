@@ -1,25 +1,11 @@
-import { useState, useCallback } from "react";
 import { Link } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface Props {
   expanded?: boolean;
 }
 
 export default function About({ expanded = false }: Props) {
-  const [clickCount, setClickCount] = useState(0);
-  const [easterEgg, setEasterEgg] = useState(false);
-
-  const handleAvatarClick = useCallback(() => {
-    const next = clickCount + 1;
-    setClickCount(next);
-    if (next >= 7) {
-      setEasterEgg(true);
-      setTimeout(() => setEasterEgg(false), 3000);
-      setClickCount(0);
-    }
-  }, [clickCount]);
-
   return (
     <section id="about" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
