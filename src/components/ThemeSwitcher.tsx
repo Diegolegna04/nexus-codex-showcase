@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTheme } from "./ThemeContext";
 
-type Theme = "dark" | "light" | "dim";
+type Theme = "dark" | "light" | "dim" | "phantom";
 
 interface ThemePreviewColors {
   bg: string;
@@ -47,6 +47,18 @@ const themeMeta: { id: Theme; label: string; hint: string; colors: ThemePreviewC
       border: "oklch(0.3 0.01 260)",
       text: "oklch(0.88 0.006 260)",
       primary: "oklch(0.68 0.13 192)",
+    },
+  },
+  {
+    id: "phantom",
+    label: "Phantom",
+    hint: "Take it",
+    colors: {
+      bg: "oklch(0.08 0.005 20)",
+      surface: "oklch(0.14 0.01 20)",
+      border: "oklch(0.55 0.22 25)",
+      text: "oklch(0.98 0.005 60)",
+      primary: "oklch(0.6 0.25 25)",
     },
   },
 ];
