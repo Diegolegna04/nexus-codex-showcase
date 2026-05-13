@@ -93,6 +93,10 @@
   --glow-muted: oklch(0.72 0.14 192 / 12%);
   --surface: oklch(0.17 0.012 260);
   --surface-elevated: oklch(0.21 0.012 260);
+  --hp: oklch(0.78 0.13 210);
+  --hp-glow: oklch(0.78 0.13 210 / 35%);
+  --sp: oklch(0.65 0.27 340);
+  --sp-glow: oklch(0.65 0.27 340 / 35%);
 }
 
 /* Light theme */
@@ -218,6 +222,80 @@
 .phantom h1, .phantom h2, .phantom h3 {
   letter-spacing: -0.01em;
   font-weight: 700;
+}
+
+.phantom {
+  --hp: oklch(0.78 0.15 210);
+  --hp-glow: oklch(0.78 0.15 210 / 55%);
+  --sp: oklch(0.7 0.3 340);
+  --sp-glow: oklch(0.7 0.3 340 / 55%);
+}
+
+/* Phantom-mode body decorations */
+.phantom body, body:has(.phantom) {
+  background-image:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0,
+      transparent 24px,
+      oklch(0.6 0.25 25 / 3%) 24px,
+      oklch(0.6 0.25 25 / 3%) 25px
+    );
+}
+
+/* Cursor trail dots */
+.phantom-trail-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  margin-top: -3px;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: oklch(0.6 0.25 25 / 30%);
+  box-shadow: 0 0 6px oklch(0.6 0.25 25 / 25%);
+  animation: trail-fade 0.35s ease-out forwards;
+  will-change: transform, opacity;
+}
+.phantom-trail-dot[data-active="1"] {
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  margin-top: -5px;
+  background: oklch(0.62 0.27 25 / 75%);
+  box-shadow:
+    0 0 14px oklch(0.62 0.27 25 / 70%),
+    0 0 28px oklch(0.65 0.27 340 / 35%);
+  animation: trail-fade-active 0.7s ease-out forwards;
+}
+@keyframes trail-fade {
+  from { opacity: 0.7; transform: scale(1); }
+  to { opacity: 0; transform: scale(0.4); }
+}
+@keyframes trail-fade-active {
+  0% { opacity: 0.95; transform: scale(1.1); }
+  60% { opacity: 0.55; transform: scale(0.85) translateY(2px); }
+  100% { opacity: 0; transform: scale(0.3) translateY(8px); }
+}
+
+/* Long slash transition (~1s) */
+@keyframes phantom-slash-long {
+  0% { transform: translateX(-130%) skewX(-22deg); opacity: 0; }
+  18% { opacity: 1; }
+  55% { transform: translateX(0%) skewX(-22deg); opacity: 1; }
+  100% { transform: translateX(130%) skewX(-22deg); opacity: 0; }
+}
+@keyframes phantom-wash {
+  0% { opacity: 0; }
+  20% { opacity: 0.85; }
+  70% { opacity: 0.4; }
+  100% { opacity: 0; }
+}
+@keyframes phantom-label {
+  0% { opacity: 0; transform: translateY(20px) skewX(-8deg); letter-spacing: 0.1em; }
+  35% { opacity: 1; transform: translateY(0) skewX(-8deg); letter-spacing: 0.4em; }
+  80% { opacity: 1; transform: translateY(0) skewX(-8deg); letter-spacing: 0.45em; }
+  100% { opacity: 0; transform: translateY(-10px) skewX(-8deg); letter-spacing: 0.5em; }
 }
 
 /* Phantom slash easter-egg overlay */
