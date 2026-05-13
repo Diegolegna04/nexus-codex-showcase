@@ -1,25 +1,11 @@
-import { useState, useCallback } from "react";
 import { Link } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface Props {
   expanded?: boolean;
 }
 
 export default function About({ expanded = false }: Props) {
-  const [clickCount, setClickCount] = useState(0);
-  const [easterEgg, setEasterEgg] = useState(false);
-
-  const handleAvatarClick = useCallback(() => {
-    const next = clickCount + 1;
-    setClickCount(next);
-    if (next >= 7) {
-      setEasterEgg(true);
-      setTimeout(() => setEasterEgg(false), 3000);
-      setClickCount(0);
-    }
-  }, [clickCount]);
-
   return (
     <section id="about" className="px-6 py-24">
       <div className="mx-auto max-w-6xl">
@@ -57,29 +43,8 @@ export default function About({ expanded = false }: Props) {
         >
           {/* Avatar */}
           <div className="relative mx-auto w-full max-w-xs lg:mx-0">
-            <button
-              onClick={handleAvatarClick}
-              className="w-full overflow-hidden rounded-xl border border-border bg-card p-1 shadow-sm cursor-default focus:outline-none"
-              aria-label="Avatar"
-            >
+            <div className="w-full overflow-hidden rounded-xl border border-border bg-card p-1 shadow-sm">
               <div className="flex aspect-square items-center justify-center rounded-lg bg-gradient-to-br from-primary/8 via-surface-elevated to-surface relative overflow-hidden">
-                <AnimatePresence>
-                  {easterEgg && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      className="absolute inset-0 flex items-center justify-center bg-surface/90 backdrop-blur-sm z-10"
-                    >
-                      <div className="text-center">
-                        <div className="text-4xl mb-2">🗡️</div>
-                        <p className="font-mono text-[10px] text-primary tracking-wider">
-                          Nothing is true
-                        </p>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
                 {/* Minimal SVG developer avatar — placeholder, easily replaceable */}
                 <svg
                   viewBox="0 0 200 200"
@@ -97,7 +62,7 @@ export default function About({ expanded = false }: Props) {
                   <path d="M118 80l10 8-10 8" opacity="0.6" />
                 </svg>
               </div>
-            </button>
+            </div>
             <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 rounded-full border border-border bg-card px-4 py-1.5 shadow-sm">
               <span className="flex items-center gap-1.5 font-mono text-[10px] tracking-wider text-primary uppercase">
                 <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse-glow" />

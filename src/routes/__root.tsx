@@ -1,5 +1,6 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { ThemeProvider } from "@/components/ThemeContext";
+import PhantomEasterEgg from "@/components/PhantomEasterEgg";
 
 import appCss from "../styles.css?url";
 
@@ -63,6 +64,7 @@ function RootComponent() {
   return (
     <ThemeProvider>
       <Outlet />
+      <PhantomEasterEgg />
     </ThemeProvider>
   );
 }

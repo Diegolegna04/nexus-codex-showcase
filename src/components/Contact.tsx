@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTheme } from "./ThemeContext";
 
 const links = [
   {
@@ -35,6 +36,11 @@ interface Props {
 }
 
 export default function Contact({ expanded = false }: Props) {
+  const { theme } = useTheme();
+  const footerTagline =
+    theme === "phantom"
+      ? "Take the code. Steal the heart."
+      : "Built with Angular in mind";
   return (
     <section id="contact" className="px-6 py-24">
       <div className="mx-auto max-w-2xl text-center">
@@ -103,7 +109,7 @@ export default function Contact({ expanded = false }: Props) {
 
       <div className="mx-auto mt-24 max-w-6xl border-t border-border pt-8 text-center">
         <p className="font-mono text-[10px] tracking-widest text-muted-foreground/40 uppercase">
-          © {new Date().getFullYear()} Diego Legnaro — Built with Angular in mind
+          © {new Date().getFullYear()} Diego Legnaro — {footerTagline}
         </p>
       </div>
     </section>
