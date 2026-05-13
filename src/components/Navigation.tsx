@@ -77,6 +77,15 @@ export default function Navigation() {
               {item.label}
             </Link>
           ))}
+          {active && (
+            <Link
+              to="/secret"
+              className="font-mono text-xs tracking-wider uppercase transition-colors"
+              style={{ color: "var(--primary)" }}
+            >
+              ✦ Off-Record
+            </Link>
+          )}
           <ThemeSwitcher />
         </div>
 
