@@ -82,23 +82,29 @@ function SkillCard({
   active,
   tone,
   index,
+  phantom,
 }: {
   skill: Skill;
   delay: number;
   active: boolean;
   tone: "hp" | "sp" | "mix";
   index: number;
+  phantom: boolean;
 }) {
-  const accent =
-    tone === "hp"
+  const accent = phantom
+    ? tone === "hp"
       ? "var(--hp)"
       : tone === "sp"
       ? "var(--sp)"
       : index % 2 === 0
       ? "var(--hp)"
-      : "var(--sp)";
-  const glow =
-    accent === "var(--hp)" ? "var(--hp-glow)" : "var(--sp-glow)";
+      : "var(--sp)"
+    : "var(--primary)";
+  const glow = phantom
+    ? accent === "var(--hp)"
+      ? "var(--hp-glow)"
+      : "var(--sp-glow)"
+    : "var(--glow-muted)";
 
   return (
     <motion.div
@@ -201,10 +207,12 @@ export default function Skills() {
                   className="text-lg"
                   style={{
                     color:
-                      cat.tone === "hp"
+                      active
+                        ? cat.tone === "hp"
                         ? "var(--hp)"
                         : cat.tone === "sp"
                         ? "var(--sp)"
+                          : "var(--primary)"
                         : "var(--primary)",
                     textShadow: active
                       ? `0 0 12px ${cat.tone === "sp" ? "var(--sp-glow)" : "var(--hp-glow)"}`
@@ -231,6 +239,7 @@ export default function Skills() {
                     active={inView}
                     tone={cat.tone}
                     index={si}
+                    phantom={active}
                   />
                 ))}
               </div>
