@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SecretRouteImport } from './routes/secret'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as AnteroomRouteImport } from './routes/anteroom'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
@@ -24,6 +25,11 @@ const SecretRoute = SecretRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnteroomRoute = AnteroomRouteImport.update({
+  id: '/anteroom',
+  path: '/anteroom',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -50,6 +56,7 @@ const ProjectsProjectIdRoute = ProjectsProjectIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/anteroom': typeof AnteroomRoute
   '/contact': typeof ContactRoute
   '/secret': typeof SecretRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
@@ -58,6 +65,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/anteroom': typeof AnteroomRoute
   '/contact': typeof ContactRoute
   '/secret': typeof SecretRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
@@ -67,6 +75,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/anteroom': typeof AnteroomRoute
   '/contact': typeof ContactRoute
   '/secret': typeof SecretRoute
   '/projects/$projectId': typeof ProjectsProjectIdRoute
@@ -77,6 +86,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/anteroom'
     | '/contact'
     | '/secret'
     | '/projects/$projectId'
@@ -85,6 +95,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/anteroom'
     | '/contact'
     | '/secret'
     | '/projects/$projectId'
@@ -93,6 +104,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/anteroom'
     | '/contact'
     | '/secret'
     | '/projects/$projectId'
@@ -102,6 +114,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AnteroomRoute: typeof AnteroomRoute
   ContactRoute: typeof ContactRoute
   SecretRoute: typeof SecretRoute
   ProjectsProjectIdRoute: typeof ProjectsProjectIdRoute
@@ -122,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/anteroom': {
+      id: '/anteroom'
+      path: '/anteroom'
+      fullPath: '/anteroom'
+      preLoaderRoute: typeof AnteroomRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -158,6 +178,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AnteroomRoute: AnteroomRoute,
   ContactRoute: ContactRoute,
   SecretRoute: SecretRoute,
   ProjectsProjectIdRoute: ProjectsProjectIdRoute,

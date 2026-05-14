@@ -4,6 +4,7 @@ import { PhantomModeProvider } from "@/components/PhantomModeContext";
 import PhantomEasterEgg from "@/components/PhantomEasterEgg";
 import SlashOverlay from "@/components/SlashOverlay";
 import PhantomCursor from "@/components/PhantomCursor";
+import GlassShatter from "@/components/GlassShatter";
 
 import appCss from "../styles.css?url";
 
@@ -71,6 +72,7 @@ function RootComponent() {
         <PhantomEasterEgg />
         <SlashOverlay />
         <PhantomCursor />
+        <GlassShatter />
       </PhantomModeProvider>
     </ThemeProvider>
   );

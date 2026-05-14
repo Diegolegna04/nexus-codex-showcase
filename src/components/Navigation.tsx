@@ -78,13 +78,23 @@ export default function Navigation() {
             </Link>
           ))}
           {active && (
-            <Link
-              to="/secret"
-              className="font-mono text-xs tracking-wider uppercase transition-colors"
-              style={{ color: "var(--primary)" }}
-            >
-              ✦ Off-Record
-            </Link>
+            <>
+              <Link
+                to="/secret"
+                className="font-mono text-xs tracking-wider uppercase transition-colors"
+                style={{ color: "var(--primary)" }}
+              >
+                ✦ Off-Record
+              </Link>
+              <Link
+                to="/anteroom"
+                className="font-mono text-xs tracking-wider uppercase transition-colors"
+                style={{ color: "oklch(0.7 0.16 250)" }}
+                title="step inside"
+              >
+                ◇ Anteroom
+              </Link>
+            </>
           )}
           <ThemeSwitcher />
         </div>
